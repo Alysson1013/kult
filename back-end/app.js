@@ -18,4 +18,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
+const movie = require('./routes/movie')
+app.use('/movie', movie)
+
 module.exports = app;
