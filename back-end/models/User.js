@@ -8,7 +8,7 @@ class Movie {
             let hash = await bcrypt.hash(password, 10)
             await knex.insert({
                 username, email, avatar, describe, slug: slugify(username),password: hash, role: 0
-            }).table("movies")
+            }).table("users")
         } catch (error) {
             console.log(error)
         }
@@ -57,7 +57,7 @@ class Movie {
     }
 
     async findByIdAndUpdate(id, changes){ 
-        let count = await knex.where({id: id}).update(changes).table('movies')
+        let count = await knex.where({id: id}).update(changes).table('users')
         return count
     }
 
