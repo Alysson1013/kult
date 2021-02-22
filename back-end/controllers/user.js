@@ -1,4 +1,8 @@
 const User = require("../models/User")
+const validator = require("validator")
+const jwt = require("jsonwebtoken")
+const secret = "adfsadsadsad"
+const bcrypt = require("bcrypt")
 
 class Controller{
     async create(req, res){
@@ -75,16 +79,7 @@ class Controller{
             delete changes.email
             delete changes.role
 
-            try {
-                let count = User.findByIdAndUpdate(id, changes)
-                if (count) {
-                  res.status(200).json({updated: count})
-                } else {
-                  res.status(404).json({message: "User not found"})
-                }
-              } catch (err) {
-                res.status(500).json({message: "Error updating", error: err})
-              }
+            let count = User.findByIdAndUpdate(id, changes)
         } catch (error) {
             console.error(erro)
             res.status(500).end()

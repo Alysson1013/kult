@@ -2,10 +2,10 @@ const { default: slugify } = require("slugify")
 const knex = require("../config/database")
 
 class Movie {
-    async new(title, description, genre, note, thumb,  year, movie_link, trailer_link){
+    async new(title, description, genre, note, thumb,  year, movie_link, trailer_link, duration){
         try {
             await knex.insert({
-                title, description, genre, note, thumb, year, movie_link, trailer_link, slug: slugify(title)
+                title, description, genre, note, thumb, year, movie_link, trailer_link, duration, slug: slugify(title)
             }).table("movies")
         } catch (error) {
             console.log(error)

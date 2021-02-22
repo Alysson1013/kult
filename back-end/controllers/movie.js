@@ -3,8 +3,8 @@ const Movie = require("../models/Movie")
 class Controller{
     async create(req, res){
         try{
-            let {title, description, genre, note, thumb, year, movie_link, trailer_link} = req.body
-            await Movie.new(title, description, genre, note, thumb, year, movie_link, trailer_link)
+            let {title, description, genre, note, thumb, year, movie_link, trailer_link, duration} = req.body
+            await Movie.new(title, description, genre, note, thumb, year, movie_link, trailer_link, duration)
     
             res.send("OK")
             res.status(200)

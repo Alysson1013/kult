@@ -3,10 +3,10 @@ const { route } = require(".");
 var router = express.Router();
 var Controller = require('../controllers/movie')
 
-router.post('/admin/', Controller.create)
+router.post('/', Controller.create)
 router.get('/', Controller.findAll)
 router.get('/:id', Controller.findOne)
-router.delete('/admin/', Controller.delete)
-router.put('/admin/:id', Controller.update)
+router.delete('/', Controller.delete)
+router.put('/:id', Controller.update)
 
 module.exports = router
