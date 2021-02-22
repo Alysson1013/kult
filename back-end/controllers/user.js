@@ -81,6 +81,36 @@ class Controller{
             res.status(404).send(error)
         }
     }
+
+    async deleteAccount(req, res){
+        const authToken = req.headers['authorization']
+
+        if(authToken != undefined){
+            const bearer = authToken.split(' ')
+            const token = bearer[1]
+    
+            try{
+                const decoded = jwt.verify(token, secret)
+                console.log(decoded)
+                try {
+                    let id = decoded.id
+                    let obj = await User.findByIdAndDelete(id) 
+                    console.log(obj)
+                    if (obj.status) res.status(204).end()
+                    else res.status(404).end()
+                } catch (error) {
+                    console.error(error)
+                    res.status(404).send(error)
+                }
+            } catch(error){
+                res.status(403)
+                res.send("You are not Logged")
+            }
+        } else {
+            res.status(403)
+            res.send("You are not Logged")
+        }
+    }
     
     async update(req, res){
         try {
@@ -109,17 +139,17 @@ class Controller{
             let result = await bcrypt.compare(password, user.password)
             if (result){
                 let token = jwt.sign({
+                    id: user.id,
                     email: user.email,
                     role: user.role
                 }, secret)
-
                 res.status(200)
                 res.send({
                     token: token
                 })
             } else {
                 res.status(406)
-                res.send("Senha Incorreta")
+                res.send("Incorrect Password")
             }
         } else {
             res.json({
