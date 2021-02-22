@@ -8,8 +8,8 @@ class Movie {
     async new(username, avatar, email, password, describe){
         try {
             let hash = await bcrypt.hash(password, 10)
-            await knex.insert({
-                username, email, avatar, describe, slug: slugify(username),password: hash, role: 0
+            await knex.insert({ 
+                username, email, avatar, describe, password: hash, role: 0
             }).table("users")
         } catch (error) {
             console.log(error)
@@ -102,6 +102,7 @@ class Movie {
             return undefined
         }
     }
+
 }
 
 module.exports = new Movie()
