@@ -6,7 +6,7 @@ class Review {
         try {
             await knex.insert({
                 text, title, user_id, movie_id, note
-            }).table("movies")
+            }).table("reviews")
         } catch (error) {
             console.log(error)
         }
@@ -14,7 +14,7 @@ class Review {
     }
     async findAll(){
         try {
-            let result = await knex.select(['*']).table("movies")
+            let result = await knex.select(['*']).table("reviews")
             return result
         } catch (error) {
             console.log(error)
@@ -24,7 +24,7 @@ class Review {
 
     async findById(id){
         try {
-            let result = await knex.select(['*']).where({id: id}).table("movies")
+            let result = await knex.select(['*']).where({id: id}).table("reviews")
             return result 
         } catch (error) {
             console.log(error)
@@ -37,7 +37,7 @@ class Review {
             let data = await this.findById(id)
             if(data.length == 1){
                 try {
-                    await knex.delete().where({id: id}).table("movies")
+                    await knex.delete().where({id: id}).table("reviews")
                     return { status: true }
                 } catch (error) {
                     return{
@@ -55,7 +55,7 @@ class Review {
     }
 
     async findByIdAndUpdate(id, changes){ 
-        let count = await knex.where({id: id}).update(changes).table('movies')
+        let count = await knex.where({id: id}).update(changes).table('reviews')
         return count
     }
 }

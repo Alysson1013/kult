@@ -1,10 +1,10 @@
-const Movie = require("../models/Movie")
+const Review = require("../models/Review")
 
 class Controller{
     async create(req, res){
         try{
-            let {title, description, genre, note, thumb, year, movie_link, trailer_link, duration} = req.body
-            await Movie.new(title, description, genre, note, thumb, year, movie_link, trailer_link, duration)
+            let {text, title, user_id, movie_id, note} = req.body
+            await Review.new(text, title, user_id, movie_id, note)
     
             res.send("OK")
             res.status(200)
@@ -16,7 +16,7 @@ class Controller{
 
     async findAll(req, res){
         try {
-            let data = await Movie.findAll()
+            let data = await Review.findAll()
             res.send(data)
         } catch (error) {
             console.log(error)
@@ -27,7 +27,7 @@ class Controller{
     async findOne(req, res){
         try {
             let id = req.params.id
-            let data = await Movie.findById(id)
+            let data = await Review.findById(id)
 
             if (data.length == 1) res.send(data)
             else res.status(404).end()
@@ -40,7 +40,7 @@ class Controller{
     async delete(req, res){
         try {
             let id = req.body.id
-            let obj = await Movie.findByIdAndDelete(id) 
+            let obj = await Review.findByIdAndDelete(id) 
             console.log(obj)
             if (obj.status) res.status(204).end()
             else res.status(500).end()
@@ -55,7 +55,7 @@ class Controller{
             let id = req.params.id
             let changes = req.body
             try {
-                Movie.findByIdAndUpdate(id, changes)
+                Review.findByIdAndUpdate(id, changes)
                 res.status(201).end()
               } catch (err) {
                 res.status(500).end()
