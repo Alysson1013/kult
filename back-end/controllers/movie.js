@@ -42,7 +42,7 @@ class Controller{
             let obj = await Movie.findByIdAndDelete(id) 
             console.log(obj)
             if (obj.status) res.status(204).end()
-            else res.json(obj)
+            else res.status(500).end()
         } catch (error) {
             console.error(error)
             res.status(404).send(error)
@@ -54,14 +54,10 @@ class Controller{
             let id = req.params.id
             let changes = req.body
             try {
-                let count = Movie.findByIdAndUpdate(id, changes)
-                if (count) {
-                  res.status(200).json({updated: count})
-                } else {
-                  res.status(404).json({message: "Movie not found"})
-                }
+                Movie.findByIdAndUpdate(id, changes)
+                res.status(201).end()
               } catch (err) {
-                res.status(500).json({message: "Error updating", error: err})
+                res.status(500).end()
               }
         } catch (error) {
             console.error(erro)

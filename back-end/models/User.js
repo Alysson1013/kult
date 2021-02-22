@@ -1,6 +1,8 @@
 const { default: slugify } = require("slugify")
 const knex = require("../config/database")
 const bcrypt = require("bcrypt")
+const jwt = require("jsonwebtoken")
+const secret = "adfsadsadsad"
 
 class Movie {
     async new(username, avatar, email, password, describe){
@@ -74,9 +76,22 @@ class Movie {
         }
     }
 
+    async findUsername(username){
+        try {
+            let result = await knex.select("*").from("users").where({username: username})
+            console.log(result)
+
+            if(result.length > 0) return true
+            else return false
+        } catch (error) {
+            console.log(error)
+            return false
+        }
+    }
+
     async findByEmail(email){
         try {
-            var result = await knex.select(["id", "name", "email", "password", "role"]).where({email: email}).table("users")
+            var result = await knex.select(['*']).where({email: email}).table("users")
             if (result.length > 0){
                 return result[0]
             } else {

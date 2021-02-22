@@ -1,8 +1,11 @@
+require('dotenv').config()
+
 const User = require("../models/User")
 const validator = require("validator")
 const jwt = require("jsonwebtoken")
-const secret = "adfsadsadsad"
+const secret = process.env.SECRET
 const bcrypt = require("bcrypt")
+
 
 class Controller{
     async create(req, res){
@@ -17,12 +20,22 @@ class Controller{
                 res.status(400);
                 return res.json({err: "Invalid Password"})    
             }
+
+            if(username == undefined){
+                res.status(400);
+                return res.json({err: "Invalid Password"})    
+            }
             
             let emailexists = await User.findEmail(email)
+            let usernameexists = await User.findUsername(username)
 
             if(emailexists){
                 res.status(406)
-                return res.json({err: "Email já cadastrado."})
+                return res.json({err: "Email already registered."})
+            }
+            if(usernameexists){
+                res.status(406)
+                return res.json({err: "Username already registered."})
             }
 
             await User.new(username, avatar, email, password, describe)
@@ -62,7 +75,7 @@ class Controller{
             let obj = await User.findByIdAndDelete(id) 
             console.log(obj)
             if (obj.status) res.status(204).end()
-            else res.json(obj)
+            else res.status(404).end()
         } catch (error) {
             console.error(error)
             res.status(404).send(error)
@@ -79,10 +92,39 @@ class Controller{
             delete changes.email
             delete changes.role
 
-            let count = User.findByIdAndUpdate(id, changes)
+            User.findByIdAndUpdate(id, changes)
+            res.status(201).end()
         } catch (error) {
             console.error(erro)
             res.status(500).end()
+        }
+    }
+
+    async login(req, res){
+        let {email, password} = req.body
+
+        let user = await User.findByEmail(email)
+
+        if (user != undefined){
+            let result = await bcrypt.compare(password, user.password)
+            if (result){
+                let token = jwt.sign({
+                    email: user.email,
+                    role: user.role
+                }, secret)
+
+                res.status(200)
+                res.send({
+                    token: token
+                })
+            } else {
+                res.status(406)
+                res.send("Senha Incorreta")
+            }
+        } else {
+            res.json({
+                status: false
+            })
         }
     }
 }
