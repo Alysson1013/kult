@@ -12,6 +12,15 @@ class Movie {
         }
         
     }
+    async findAll(){
+        try {
+            const result = await knex.select(['*']).table("movies")
+            return result
+        } catch (error) {
+            console.log(error)
+            return []
+        }
+    }
 }
 
 module.exports = new Movie()
