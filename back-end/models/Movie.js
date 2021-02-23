@@ -25,6 +25,7 @@ class Movie {
     async findById(id){
         try {
             let result = await knex.select(['*']).where({id: id}).table("movies")
+            result.push(await knex.select(["users.avatar", "users.username", "reviews.text", "reviews.title", "reviews.note"]).table("users").innerJoin("reviews", "reviews.user_id", "users.id").innerJoin("movies", "movies.id", "reviews.movie_id").where("reviews.movie_id", id))
             return result 
         } catch (error) {
             console.log(error)

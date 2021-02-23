@@ -28,8 +28,9 @@ class Controller{
         try {
             let id = req.params.id
             let data = await Movie.findById(id)
+            console.log(data)
 
-            if (data.length == 1) res.send(data)
+            if (data.length >= 1) res.send(data)
             else res.status(404).end()
         } catch (error) {
             console.log(error)
