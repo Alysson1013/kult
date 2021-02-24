@@ -24,6 +24,9 @@ app.use('/movie', movie)
 const user = require('./routes/user')
 app.use('/user', user)
 
+const profile = require('./routes/profile')
+app.use('/profile', profiles)
+
 const review = require('./routes/review')
 app.use('/review', review)
 
