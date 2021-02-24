@@ -12,9 +12,8 @@ router.delete('/admin/', auth, Controller.delete)
 router.put('/admin/:id', auth, Controller.update)
 
 //User routes
-router.post('/')
-router.put(':id')
-router.delete('/')
+router.post('/', Controller.createReview)
+router.delete('/', )
 
 
 module.exports = router
