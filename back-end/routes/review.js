@@ -13,7 +13,7 @@ router.put('/admin/:id', auth, Controller.update)
 
 //User routes
 router.post('/', Controller.createReview)
-router.delete('/', )
+router.delete('/', Controller.deleteReview)
 
 
 module.exports = router

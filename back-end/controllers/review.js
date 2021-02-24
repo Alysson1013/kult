@@ -92,6 +92,44 @@ class Controller{
             res.status(404).send(error)
         }
     }
+
+    async deleteReview(req, res){
+        const authToken = req.headers['authorization']
+        let idToDelete = req.body.id
+
+        if(authToken != undefined){
+            const bearer = authToken.split(' ')
+            const token = bearer[1]
+    
+            try{
+                const decoded = jwt.verify(token, secret)
+                console.log(decoded)
+                try {
+                    let idUser = decoded.id
+                    let reviewUser = await Review.findById(idToDelete)
+
+                    if (idUser == reviewUser[0].user_id){
+                        let obj = await Review.findByIdAndDelete(idToDelete) 
+                        
+                        if (obj.status) res.status(204).end()
+                        else res.status(404).end()
+                    } else {
+                        res.status(403)
+                        res.send("You don't own this review")
+                    }
+                } catch (error) {
+                    console.error(error)
+                    res.status(404).send(error)
+                }
+            } catch(error){
+                res.status(403)
+                res.send("You are not Logged")
+            }
+        } else {
+            res.status(403)
+            res.send("You are not Logged")
+        }
+    }
     
     async update(req, res){
         try {
