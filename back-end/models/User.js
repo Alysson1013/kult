@@ -1,8 +1,6 @@
-const { default: slugify } = require("slugify")
 const knex = require("../config/database")
 const bcrypt = require("bcrypt")
-const jwt = require("jsonwebtoken")
-const secret = "adfsadsadsad"
+
 
 class Movie {
     async new(username, avatar, email, password, describe){

@@ -82,6 +82,44 @@ class Controller{
         }
     }
 
+    async updateAccount(req, res){
+        const authToken = req.headers['authorization']
+        let changes = req.body
+
+        if(authToken != undefined){
+            const bearer = authToken.split(' ')
+            const token = bearer[1]
+            console.log("caiu aqui")
+    
+            try{
+                const decoded = jwt.verify(token, secret)
+                console.log(decoded)
+                try {
+                    let id = decoded.id
+
+                    delete changes.password
+                    delete changes.username
+                    delete changes.email
+                    delete changes.role
+
+                    console.log(id)
+
+                    await User.findByIdAndUpdate(id, changes)
+                    res.status(201).end()
+                } catch (error) {
+                    console.error(error)
+                    res.status(404).send(error)
+                }
+            } catch(error){
+                res.status(403)
+                res.send("You are not Logged")
+            }
+        } else {
+            res.status(403)
+            res.send("You are not Logged")
+        }
+    }
+
     async deleteAccount(req, res){
         const authToken = req.headers['authorization']
 
@@ -116,11 +154,6 @@ class Controller{
         try {
             let id = req.params.id
             let changes = req.body
-
-            delete changes.password
-            delete changes.username
-            delete changes.email
-            delete changes.role
 
             User.findByIdAndUpdate(id, changes)
             res.status(201).end()
