@@ -89,7 +89,6 @@ class Controller{
         if(authToken != undefined){
             const bearer = authToken.split(' ')
             const token = bearer[1]
-            console.log("caiu aqui")
     
             try{
                 const decoded = jwt.verify(token, secret)
