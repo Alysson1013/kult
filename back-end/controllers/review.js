@@ -130,14 +130,15 @@ class Controller{
             res.send("You are not Logged")
         }
     }
-    
+
     async update(req, res){
         try {
             let id = req.params.id
             let changes = req.body
             try {
-                Review.findByIdAndUpdate(id, changes)
-                res.status(201).end()
+                let obj = await Review.findByIdAndUpdate(id, changes)
+                if (obj.status) res.status(201).end()
+                else res.status(404).end()
               } catch (err) {
                 res.status(500).end()
               }

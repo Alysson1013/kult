@@ -55,8 +55,25 @@ class Review {
     }
 
     async findByIdAndUpdate(id, changes){ 
-        let count = await knex.where({id: id}).update(changes).table('reviews')
-        return count
+        try {
+            let count = await knex.where({id: id}).update(changes).table('reviews')
+            if (count){
+                return{
+                    status: true
+                }
+            } else {
+                return{
+                    status: false,
+                    error: "Not Found"
+                }
+            }
+        } catch (error) {
+            return{
+                status: false,
+                error: error
+            }
+        }
+
     }
 }
 
