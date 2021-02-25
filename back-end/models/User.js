@@ -57,8 +57,24 @@ class Movie {
     }
 
     async findByIdAndUpdate(id, changes){ 
-        let count = await knex.where({id: id}).update(changes).table('users')
-        return count
+        try {
+            let count = await knex.where({id: id}).update(changes).table('users')
+            if (count){
+                return{
+                    status: true
+                }
+            } else {
+                return{
+                    status: false,
+                    error: "Not Found"
+                }
+            }
+        } catch (error) {
+            return{
+                status: false,
+                error: error
+            }
+        }
     }
 
     async findEmail(email){

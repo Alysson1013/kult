@@ -156,11 +156,13 @@ class Controller{
         try {
             let id = req.params.id
             let changes = req.body
-
-            let obj = await User.findByIdAndUpdate(id, changes)
-            console.log(obj)
-            if (obj.status) res.status(201).end()
-            else res.status(404).end()
+            try {
+                let obj = await User.findByIdAndUpdate(id, changes)
+                if (obj.status) res.status(201).end()
+                else res.status(404).end()
+              } catch (err) {
+                res.status(500).end()
+              }
         } catch (error) {
             console.error(erro)
             res.status(500).end()
