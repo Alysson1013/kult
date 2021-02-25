@@ -61,7 +61,10 @@ class Controller{
         try {
             let id = req.params.id
             let data = await User.findById(id)
-            if (data.length == 1) res.send(data)
+            if (data.length == 1){
+                delete data[0].password
+                res.send(data)
+            } 
             else res.status(404).end()
         } catch (error) {
             console.log(error)
@@ -154,8 +157,10 @@ class Controller{
             let id = req.params.id
             let changes = req.body
 
-            User.findByIdAndUpdate(id, changes)
-            res.status(201).end()
+            let obj = await User.findByIdAndUpdate(id, changes)
+            console.log(obj)
+            if (obj.status) res.status(201).end()
+            else res.status(404).end()
         } catch (error) {
             console.error(erro)
             res.status(500).end()

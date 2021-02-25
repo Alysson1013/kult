@@ -3,8 +3,8 @@ const Movie = require("../models/Movie")
 class Controller{
     async create(req, res){
         try{
-            let {title, description, genre, note, thumb, year, movie_link, trailer_link, duration} = req.body
-            await Movie.new(title, description, genre, note, thumb, year, movie_link, trailer_link, duration)
+            let {title, description, genre, note, thumb, year, movie_link, trailer_link, duration, director} = req.body
+            await Movie.new(title, description, genre, note, thumb, year, movie_link, trailer_link, duration, director)
     
             res.send("OK")
             res.status(200)
@@ -30,7 +30,7 @@ class Controller{
             let data = await Movie.findById(id)
             console.log(data)
 
-            if (data.length >= 1) res.send(data)
+            if (data[0].id) res.send(data)
             else res.status(404).end()
         } catch (error) {
             console.log(error)
@@ -42,7 +42,6 @@ class Controller{
         try {
             let id = req.body.id
             let obj = await Movie.findByIdAndDelete(id) 
-            console.log(obj)
             if (obj.status) res.status(204).end()
             else res.status(500).end()
         } catch (error) {
@@ -56,8 +55,9 @@ class Controller{
             let id = req.params.id
             let changes = req.body
             try {
-                Movie.findByIdAndUpdate(id, changes)
-                res.status(201).end()
+                let obj = await Movie.findByIdAndUpdate(id, changes)
+                if (obj.status) res.status(201).end()
+                else res.status(404).end()
               } catch (err) {
                 res.status(500).end()
               }

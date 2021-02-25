@@ -5,15 +5,14 @@ var Controller = require('../controllers/review')
 const auth = require('../middleware/auth')
 
 //ADM routes
-router.post('/admin/', auth, Controller.create)
-router.get('/admin/', Controller.findAll)
-router.get('/admin/:id', Controller.findOne)
+router.post('/admin/', auth, Controller.createReview)
 router.delete('/admin/', auth, Controller.delete)
 router.put('/admin/:id', auth, Controller.update)
 
 //User routes
 router.post('/', Controller.createReview)
 router.delete('/', Controller.deleteReview)
-
+router.get('/', Controller.findAll)
+router.get('/:id', Controller.findOne)
 
 module.exports = router

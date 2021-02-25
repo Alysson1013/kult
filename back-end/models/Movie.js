@@ -36,7 +36,8 @@ class Movie {
     async findByIdAndDelete(id){
         try {
             let data = await this.findById(id)
-            if(data.length == 1){
+            console.log(data)
+            if(data.length == 2){
                 try {
                     await knex.delete().where({id: id}).table("movies")
                     return { status: true }
@@ -56,8 +57,25 @@ class Movie {
     }
 
     async findByIdAndUpdate(id, changes){ 
-        let count = await knex.where({id: id}).update(changes).table('movies')
-        return count
+        try {
+            let count = await knex.where({id: id}).update(changes).table('movies')
+            if (count){
+                return{
+                    status: true
+                }
+            } else {
+                return{
+                    status: false,
+                    error: "Not Found"
+                }
+            }
+        } catch (error) {
+            return{
+                status: false,
+                error: error
+            }
+        }
+
     }
 }
 

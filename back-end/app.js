@@ -25,7 +25,7 @@ const user = require('./routes/user')
 app.use('/user', user)
 
 const profile = require('./routes/profile')
-app.use('/profile', profiles)
+app.use('/profile', profile)
 
 const review = require('./routes/review')
 app.use('/review', review)

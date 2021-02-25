@@ -11,6 +11,6 @@ router.put('/admin/:id', auth, Controller.update)
 
 //USER routes
 router.get('/', Controller.findAll)
-router.get('/', Controller.findOne)
+router.get('/:id', Controller.findOne)
 
 module.exports = router
