@@ -22,9 +22,11 @@ npm install
 DBUSER=nomeDB
 DBPASS=senhaDB
 DBNAME=usuarioDB
+SECRET=padrao
 ```
 6. Substituir os nomeDB/senhaDB/usuarioDB pelos respectivos dados referentes ao seu banco de dados SQL.
-7. Gerar seu proprio link caso seja necessário.
+7. Substituir SECRET por uma senha para ser utilizado como padrão de codigicação e decodificação de Tokens.
+8. Gerar seu proprio link caso seja necessário.
 
 
 
