@@ -20,10 +20,10 @@ npm install
 5. No arquivo inserir o seguinte código.
 ```
 DBUSER=nomeDB
-DBPASS=senhaAtlas
-DBNAME=nomeBanco
+DBPASS=senhaDB
+DBNAME=usuarioDB
 ```
-6. Substituir os nomeDB/senhaDB/nomeDB pelos respectivos dados referentes ao seu banco de dados SQL.
+6. Substituir os nomeDB/senhaDB/usuarioDB pelos respectivos dados referentes ao seu banco de dados SQL.
 7. Gerar seu proprio link caso seja necessário.
 
 
