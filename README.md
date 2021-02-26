@@ -4,8 +4,10 @@
 
 ## Executando Projeto
 1. Mudar para diretório back-end.
+&nbsp;
 ```cd back-end```
 2. instalar dependencias.
+&nbsp;
 ```npm install```
 3. Criar um arquivos .env no diretório back-end.
 4. Iniciar um banco de dados SQL.
