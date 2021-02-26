@@ -107,7 +107,7 @@ class Controller{
                     console.log(id)
 
                     await User.findByIdAndUpdate(id, changes)
-                    res.status(201).end()
+                    res.status(202).end()
                 } catch (error) {
                     console.error(error)
                     res.status(404).send(error)

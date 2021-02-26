@@ -5,7 +5,6 @@ var Controller = require('../controllers/review')
 const auth = require('../middleware/auth')
 
 //ADM routes
-router.post('/admin/', auth, Controller.createReview)
 router.delete('/admin/', auth, Controller.delete)
 router.put('/admin/:id', auth, Controller.update)
 

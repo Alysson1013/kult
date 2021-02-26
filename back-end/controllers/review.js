@@ -25,13 +25,11 @@ class Controller{
         const authToken = req.headers['authorization']
         let {text, title, movie_id, note} = req.body
 
-        console.log("Aqui")
         if(authToken != undefined){
             const bearer = authToken.split(' ')
             const token = bearer[1]
     
             try{
-                console.log("depois aqui")
                 const decoded = jwt.verify(token, secret)
                 console.log(decoded)
 
@@ -86,7 +84,7 @@ class Controller{
             let obj = await Review.findByIdAndDelete(id) 
             console.log(obj)
             if (obj.status) res.status(204).end()
-            else res.status(500).end()
+            else res.status(404).end()
         } catch (error) {
             console.error(error)
             res.status(404).send(error)
