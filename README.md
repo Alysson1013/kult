@@ -7,7 +7,10 @@
 ```
 cd back-end
 ```
-2. npm install
+2. instalar dependencias.
+````
+npm install
+```
 3. Criar um arquivos .env no diretório back-end.
 4. Iniciar um banco de dados SQL.
 5. No arquivo inserir o seguinte código.
