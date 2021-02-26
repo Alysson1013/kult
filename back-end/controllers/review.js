@@ -135,7 +135,7 @@ class Controller{
             let changes = req.body
             try {
                 let obj = await Review.findByIdAndUpdate(id, changes)
-                if (obj.status) res.status(201).end()
+                if (obj.status) res.status(202).end()
                 else res.status(404).end()
               } catch (err) {
                 res.status(500).end()
