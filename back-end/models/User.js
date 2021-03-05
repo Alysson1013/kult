@@ -57,6 +57,7 @@ class Movie {
     }
 
     async findByIdAndUpdate(id, changes){ 
+        if(changes['password']) changes.password = await bcrypt.hash(changes['password'], 10)
         try {
             let count = await knex.where({id: id}).update(changes).table('users')
             if (count){
@@ -80,7 +81,6 @@ class Movie {
     async findEmail(email){
         try {
             let result = await knex.select("*").from("users").where({email: email})
-            console.log(result)
 
             if(result.length > 0) return true
             else return false

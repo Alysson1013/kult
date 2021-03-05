@@ -94,18 +94,16 @@ class Controller{
     async deleteReview(req, res){
         const authToken = req.headers['authorization']
         let idToDelete = req.body.id
-
         if(authToken != undefined){
             const bearer = authToken.split(' ')
             const token = bearer[1]
-    
             try{
                 const decoded = jwt.verify(token, secret)
-                console.log(decoded)
                 try {
                     let idUser = decoded.id
+                    console.log(idUser)
                     let reviewUser = await Review.findById(idToDelete)
-
+                    console.log(reviewUser)
                     if (idUser == reviewUser[0].user_id){
                         let obj = await Review.findByIdAndDelete(idToDelete) 
                         

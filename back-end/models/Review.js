@@ -24,10 +24,10 @@ class Review {
 
     async findById(id){
         try {
-            let result = await knex.select(['*']).where({id: id}).table("reviews")
+            let result = await knex.select().where({id: id}).table("reviews")
+            console.log(result)
             return result 
         } catch (error) {
-            console.log(error)
             return []
         }
     }
