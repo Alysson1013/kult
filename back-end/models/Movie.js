@@ -1,4 +1,3 @@
-const { default: slugify } = require("slugify")
 const knex = require("../config/database")
 
 class Movie {
