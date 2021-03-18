@@ -38,6 +38,20 @@ class Controller{
         }
     } 
 
+    async findGenre(req, res){
+        try {
+            let genre = req.params.genre
+            let data = await Movie.findByGenre(genre)
+            console.log(data)
+
+            if (data[0].id) res.send(data)
+            else res.status(404).end()
+        } catch (error) {
+            console.log(error)
+            res.status(500).send(error)
+        }
+    }
+
     async delete(req, res){
         try {
             let id = req.body.id

@@ -32,6 +32,16 @@ class Movie {
         }
     }
 
+    async findByGenre(genre){
+        try {
+            let result = await knex.select(['*']).where({genre: genre}).table("movies")
+            return result 
+        } catch (error) {
+            console.log(error)
+            return []
+        }
+    }
+
     async findByIdAndDelete(id){
         try {
             let data = await this.findById(id)
