@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import styles from './Slider.module.css'
+import { Link, NavLink } from 'react-router-dom'
 
 
 const Slider = ({title, firstSection}) => {
@@ -26,7 +27,9 @@ const Slider = ({title, firstSection}) => {
             } else {
                 section1.push(
                     <div className="item" key={movies[i].id}>
-                        <img src={movies[i].thumb} alt="Movie" />
+                        <NavLink to={`movie/${movies[i].id}`}>
+                            <img src={movies[i].thumb} alt="Movie" />
+                        </NavLink>
                     </div>
                 )
             }
@@ -38,7 +41,9 @@ const Slider = ({title, firstSection}) => {
             } else {
                 section2.push(
                     <div className="item" key={movies[i].id}>
-                        <img src={movies[i].thumb} alt="Movie" />
+                        <NavLink to={`movie/${movies[i].id}`}>
+                            <img src={movies[i].thumb} alt="Movie" />
+                        </NavLink>
                     </div>
                 )
             }
@@ -49,9 +54,11 @@ const Slider = ({title, firstSection}) => {
                 break;
             } else {
                 section3.push(
-                    <div className="item" key={movies[i].id}>
-                        <img src={movies[i].thumb} alt="Movie" />
-                    </div>
+                        <div className="item" key={movies[i].id}>
+                            <NavLink to={`movie/${movies[i].id}`}>
+                                <img src={movies[i].thumb} alt="Movie" />
+                            </NavLink>
+                        </div>
                 )
             }
         }
