@@ -52,6 +52,9 @@ const Movie = () => {
                 <p className={styles.description}>
                     {movie[0].description}
                 </p>
+                <p className={styles.description}>
+                    {movie[0].director}
+                </p>
             </div>
             <div className={styles.slider}>
                 <Slider title="Comedy" firstSection={1} />
