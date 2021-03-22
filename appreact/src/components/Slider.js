@@ -26,7 +26,7 @@ const Slider = ({title, firstSection}) => {
             } else {
                 section1.push(
                     <div className="item" key={movies[i].id}>
-                        <NavLink to={`movie/${movies[i].id}`}>
+                        <NavLink to={`/movie/${movies[i].id}`}>
                             <img src={movies[i].thumb} alt="Movie" />
                         </NavLink>
                     </div>
@@ -39,7 +39,7 @@ const Slider = ({title, firstSection}) => {
             } else {
                 section2.push(
                     <div className="item" key={movies[i].id}>
-                        <NavLink to={`movie/${movies[i].id}`}>
+                        <NavLink to={`/movie/${movies[i].id}`}>
                             <img src={movies[i].thumb} alt="Movie" />
                         </NavLink>
                     </div>
@@ -52,7 +52,7 @@ const Slider = ({title, firstSection}) => {
             } else {
                 section3.push(
                         <div className="item" key={movies[i].id}>
-                            <NavLink to={`movie/${movies[i].id}`}>
+                            <NavLink to={`/movie/${movies[i].id}`}>
                                 <img src={movies[i].thumb} alt="Movie" />
                             </NavLink>
                         </div>
