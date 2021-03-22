@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import styles from './Slider.module.css'
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 
 const Slider = ({title, firstSection}) => {
@@ -21,7 +21,6 @@ const Slider = ({title, firstSection}) => {
         return null
     } else {
         for (let i=0; i<3; i++){
-            console.log(i)
             if (movies[i] === undefined){
                 break;
             } else {
@@ -35,7 +34,6 @@ const Slider = ({title, firstSection}) => {
             }
         }
         for (let i = 3; i < 7; i++){
-            console.log(i)
             if (movies[i] === undefined){
                 break;
             } else {
@@ -49,7 +47,6 @@ const Slider = ({title, firstSection}) => {
             }
         }
         for (let i = 7; i < 10; i++){
-            console.log(i)
             if (movies[i] === undefined){
                 break;
             } else {
@@ -66,7 +63,7 @@ const Slider = ({title, firstSection}) => {
     return (
         <div className={styles.slider}>
           {title}
-          <div className="wrapper animate__animated animate__bounce animate__bounceInLeft">
+          <div className="wrapper animate__animated animate__bounce animate__bounceInLeft ">
             <section id={"section" + firstSection}>
                 <a href={"#section" + (firstSection + 2)} className="arrow__btn">‹</a>
                     {section1}

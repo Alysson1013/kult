@@ -1,0 +1,13 @@
+.title {
+    margin-top: 5%;
+    text-align: center;
+}
+
+.video {
+    margin-top: 5%;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
