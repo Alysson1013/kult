@@ -11,3 +11,18 @@
     flex-wrap: wrap;
     justify-content: center;
 }
+
+.slider {
+    margin-top: 5%;
+}
+
+.stars {
+    margin-top: 5%;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 10%;
+    margin-bottom: 10%;
+}

@@ -2,6 +2,8 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import ReactPlayer from "react-player"
 import styles from './Movie.module.css'
+import Slider from './Slider'
+import StarRatings from 'react-star-ratings';
 
 const Movie = () => {
     const [movie, setMovie] = React.useState(null)
@@ -25,14 +27,27 @@ const Movie = () => {
     if (movie == null) return null
     return (
         <div>
-            <h1 className={styles.title}>
+            <h1 className={styles.title + " animate__animated animate__bounceInLeft"}>
                 {movie[0].title}
             </h1>
             <div className={styles.video}>
                 <ReactPlayer
                     url={movie[0].movie_link}
-                    controls='true' 
+                    controls='true'
                 />
+            </div>
+            <div className={styles.stars + " animate__animated animate__bounceInLeft"}>
+                <StarRatings
+                    rating={movie[0].note/2}
+                    starDimension="40px"
+                    starSpacing="15px"
+                    numberOfStars={5}
+                    starRatedColor="yellow"
+                />
+            </div>
+            <div className={styles.slider}>
+                <Slider title="Comedy" firstSection={1} />
+                <Slider title="Horror" firstSection={4} />
             </div>
         </div>
     )
