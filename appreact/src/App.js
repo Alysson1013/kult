@@ -5,6 +5,7 @@ import Home from './components/Home'
 import Header from './components/Header'
 import Movie from './components/Movie'
 import Signup from './components/Signup'
+import Signin from './components/Signin'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="movie/:id" element={<Movie />} />
           <Route path="signup" element={<Signup />} />
+          <Route path="signin" element={<Signin />} />
         </Routes>
       </BrowserRouter>
     </React.Fragment>

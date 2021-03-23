@@ -30,7 +30,7 @@ const Movie = () => {
     return (
         <div>
             <Head title={`Kult | ${movie[0].title}`} />
-            <h1 className={styles.title}>
+            <h1 className={styles.title + " lide animate__animated animate__bounceInLeft"}>
                 {movie[0].title}
             </h1>
             <div className={styles.video}>

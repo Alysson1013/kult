@@ -47,7 +47,6 @@ const Signup = () => {
             <input type="submit" name="" value="Send" />
             {error && <p>{error}</p>}
         </form>
-
     )
 }
 
