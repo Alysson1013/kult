@@ -72,6 +72,21 @@ class Controller{
         }
     } 
 
+    async findByEmail(req, res){
+        try {
+            let email = req.body.email
+            console.log(email)
+            let data = await User.findByEmail(email)
+            console.log(data)
+
+            if (data.id) res.send(data)
+            else res.status(404).end()
+        } catch (error) {
+            console.log(error)
+            res.status(500).send(error)
+        }
+    }
+
     async delete(req, res){
         try {
             let id = req.body.id
