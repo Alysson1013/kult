@@ -5,10 +5,9 @@ var Controller = require('../controllers/user')
 var auth = require('../middleware/auth')
 
 //ADM routes
-router.get('/admin/:email', auth, Controller.findAll)
+router.get('/admin/', auth, Controller.findAll)
 router.delete('/admin/', auth, Controller.delete)
 router.put('/admin/:id', auth, Controller.update)
-
 
 
 module.exports = router
