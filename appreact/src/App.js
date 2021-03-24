@@ -6,10 +6,11 @@ import Header from './components/Header'
 import Movie from './components/Movie'
 import Signup from './components/Signup'
 import Signin from './components/Signin'
+import { UserStorage } from './userStorage/userContext'
 
 function App() {
   return (
-    <React.Fragment>
+    <UserStorage>
       <BrowserRouter>
         <Header />
         <Routes>
@@ -19,7 +20,7 @@ function App() {
           <Route path="signin" element={<Signin />} />
         </Routes>
       </BrowserRouter>
-    </React.Fragment>
+    </UserStorage>
   );
 }
 

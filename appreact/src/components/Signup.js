@@ -28,7 +28,7 @@ const Signup = () => {
             try {
                 const res = await axios.post("http://localhost:8080/profile/", user)
                 if (res.status == 200){
-                    window.location.href = "/"
+                    window.location.href = "/signin"
                 }
             } catch (error) {
                 setError(error.response.data.err)
