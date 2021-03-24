@@ -1,40 +1,32 @@
 import React from 'react';
-import axios from 'axios'
+import axios from 'axios';
+
 
 export const UserContext = React.createContext()
 
 export const UserStorage = ({ children }) => {
     const [user, setUser] = React.useState()
     const [error, setError] = React.useState(null)
-
-    let axiosConfig = {
-        headers: {
-            Authorization: "Bearer " + localStorage.getItem("token")
-        }
-    }
-
-    console.log(axiosConfig)
+    const [token, setToken] = React.useState(localStorage.getItem('token'))
 
     React.useEffect(() => {
         if (user == null) return null
         else {
             axios.post('http://localhost:8080/profile/login', user).then(response => {
-                console.log(response)
                 if (response.data.token) {
-                    const token = response.data.token
-                    const username = response.data.username
-                    localStorage.setItem("token", token)
-                    localStorage.setItem("username", username)
-                    window.location.href = "/"
+                    setToken(response.data.token)
+                    localStorage.setItem('token', token)
+                    if (token != null) window.location.href = "/"
                 } else {
                     setError("Username or password are invalid!")
                 }
             })
         }
-    }, [user])
+
+    }, [user, token])
 
     return (
-        <UserContext.Provider value={{ error, setUser, axiosConfig }}>
+        <UserContext.Provider value={{ error, setUser, token }}>
             {children}
         </UserContext.Provider>
     )
