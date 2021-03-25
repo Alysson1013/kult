@@ -5,11 +5,15 @@ import styles from './Movie.module.css'
 import Slider from './Slider'
 import StarRatings from 'react-star-ratings';
 import Head from './Head'
+import { UserContext } from '../userStorage/userContext'
+import axios from 'axios'
 
 const Movie = () => {
     const [movie, setMovie] = React.useState(null)
     const [error, setError] = React.useState(false)
+    const [commentBox, setCommentBox] = React.useState(null)
     const { id } = useParams()
+    const { token } = React.useContext(UserContext)
 
     React.useEffect(() => {
         async function fetchMovie(url) {
@@ -24,7 +28,63 @@ const Movie = () => {
         fetchMovie(`http://localhost:8080/movie/${id}`)
     }, [id])
 
-    console.log(movie)
+    React.useEffect(() => {
+        if (token != null) {
+            function handleClick(){
+                const title = document.getElementById("title").value
+                const text = document.getElementById("text").value
+                const note = document.querySelector('input[name="rate"]:checked').value;
+
+                axios.post("http://localhost:8080/review", {
+                    text: text,
+                    title: title,
+                    note: note,
+                    movie_id: id
+                },{
+                    headers: {
+                        Authorization:"Bearer " + token
+                    }
+                })
+            }
+
+            setCommentBox(
+                <div className={"card text-white bg-dark mb-3 " + styles.comments}>
+                    <div className="card-header">
+                        Adicione um crítica
+                    </div>
+                    <div className="card-body">
+                        <div className="mb-3">
+                            <label htmlFor="title" className="form-label">Title</label>
+                            <input type="text" className="form-control bg-dark text-white" id="title" placeholder="" />
+                            <br />
+                            <label htmlFor="text" className="form-label">Text</label>
+                            <textarea className={"form-control bg-dark text-white"} id="text" rows={3} defaultValue={""} />
+                            <br />
+                            <div className={styles.rate}>
+                                <input type="radio" id="star5" name="rate" value={5} />
+                                <label htmlFor="star5" title="text">5 stars</label>
+                                <input type="radio" id="star4" name="rate" value={4} />
+                                <label htmlFor="star4" title="text">4 stars</label>
+                                <input type="radio" id="star3" name="rate" value={3} />
+                                <label htmlFor="star3" title="text">3 stars</label>
+                                <input type="radio" id="star2" name="rate" value={2} />
+                                <label htmlFor="star2" title="text">2 stars</label>
+                                <input type="radio" id="star1" name="rate" value={1} />
+                                <label htmlFor="star1" title="text">1 star</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="card-footer bg-transparent ">
+                        <butto className="btn btn-secondary" onClick={handleClick}>
+                            Postar
+                        </butto>
+                    </div>
+                </div>
+            )
+        }
+    }, [])
+
+    console.log(token)
     if (error) return <p>{error}</p>
     if (movie == null) return null
     return (
@@ -60,13 +120,14 @@ const Movie = () => {
                 <Slider title="Comedy" firstSection={1} />
                 <Slider title="Horror" firstSection={4} />
             </div>
+            {commentBox}
             <div className={styles.comments}>
                 {
                     movie[1].map(comment => (
                         <div className="card text-white bg-dark mb-3">
                             <div className="card-header">
                                 <StarRatings
-                                    rating={comment.note / 2}
+                                    rating={comment.note}
                                     starDimension="40px"
                                     starSpacing="15px"
                                     numberOfStars={5}
