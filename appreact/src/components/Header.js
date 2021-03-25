@@ -2,9 +2,11 @@ import React from 'react'
 import styles from './Header.module.css'
 import { NavLink } from 'react-router-dom'
 import { UserContext } from '../userStorage/userContext'
+import axios from 'axios'
 
 const Header = () => {
     const { data } = React.useContext(UserContext)
+    const { token } = React.useContext(UserContext)
     const [right, setRight] = React.useState(
         <div className={"dropdown animate__animated animate__bounce animate__bounceInLeft " + styles.buttons}>
             <NavLink to="/signin">
@@ -25,7 +27,7 @@ const Header = () => {
                     </button>
                     <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
                         <li><NavLink to={`profile/${data.id}`} className="dropdown-item">My account</NavLink></li>
-                        <li><a className="dropdown-item">Delete account</a></li>
+                        <li><a className="dropdown-item" onClick={deleteAccount}>Delete account</a></li>
                         <li><hr className="dropdown-divider" /></li>
                         <li onClick={handleClick}><a className="dropdown-item" href="#">Exit</a></li>
                     </ul>
@@ -37,6 +39,23 @@ const Header = () => {
     function handleClick() {
         localStorage.removeItem('token')
         window.location.href = "/"
+    }
+
+    async function deleteAccount() {
+        try {
+            const test = window.confirm("Are you sure you want to delete your account?")
+            if (test) {
+                await axios.delete("http://localhost:8080/profile", {
+                    headers: {
+                        Authorization: "Bearer " + token
+                    }
+                })
+                localStorage.removeItem('token')
+                window.location.href = "/"
+            }
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return (
