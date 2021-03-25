@@ -19,7 +19,7 @@ function App() {
           <Route path="movie/:id" element={<Movie />} />
           <Route path="signup" element={<Signup />} />
           <Route path="signin" element={<Signin />} />
-          <Route path="profile" element={<Profile />} />
+          <Route path="profile/:id" element={<Profile />} />
         </Routes>
       </BrowserRouter>
     </UserStorage>

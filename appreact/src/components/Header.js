@@ -24,7 +24,7 @@ const Header = () => {
                         {data.username}
                     </button>
                     <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-                        <li><NavLink to='profile' className="dropdown-item">My account</NavLink></li>
+                        <li><NavLink to={`profile/${data.id}`} className="dropdown-item">My account</NavLink></li>
                         <li><a className="dropdown-item">Delete account</a></li>
                         <li><hr className="dropdown-divider" /></li>
                         <li onClick={handleClick}><a className="dropdown-item" href="#">Exit</a></li>

@@ -1,20 +1,35 @@
 import React from 'react'
 import { UserContext } from '../userStorage/userContext'
 import styles from './Profile.module.css'
+import { useParams } from 'react-router-dom'
+import axios from 'axios'
 
 const Profile = () => {
-    const { data } = React.useContext(UserContext) 
+    const { data } = React.useContext(UserContext)
+    const [user, setUser] = React.useState(data)
+    const { id } = useParams()
 
-    if (data == null) return null
+    console.log(id)
+
+    React.useEffect(() => {
+        if (id != undefined) {
+            console.log("O id " + id)
+            axios.get(`http://localhost:8080/profile/${id}`)
+                .then(response => setUser(response.data[0]))
+                .catch(err => console.log(err))
+        }
+    }, [])
+
+    if (user == null) return null
     return (
-        <div className={"card text-white bg-dark mb-3 " + styles.card} style={{ width: '30rem' }}>
-            <img src={data.avatar} className="card-img-top" alt="..." />
+        <div className={"card text-white bg-dark mb-3 animate__animated animate__bounceInLeft " + styles.card} style={{ width: '30rem' }}>
+            <img src={user.avatar} className="card-img-top" alt="..." />
             <div className="card-body ">
                 <h1>
-                    {data.username}
+                    {user.username}
                 </h1>
                 <p>
-                    {data.describe}
+                    {user.describe}
                 </p>
             </div>
         </div>

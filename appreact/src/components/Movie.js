@@ -1,5 +1,5 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { NavLink, useParams } from 'react-router-dom'
 import ReactPlayer from "react-player"
 import styles from './Movie.module.css'
 import Slider from './Slider'
@@ -77,7 +77,11 @@ const Movie = () => {
                                 <h5 className="card-title">{comment.title}</h5>
                                 <p className="card-text">{comment.text}</p>
                             </div>
-                            <div class="card-footer bg-transparent">{comment.username}</div>
+                            <div className="card-footer bg-transparent ">
+                                <NavLink className={styles.user} to={`/profile/${comment.user_id}`}>
+                                    {comment.username}
+                                </NavLink>
+                            </div>
                         </div>
                     ))
                 }

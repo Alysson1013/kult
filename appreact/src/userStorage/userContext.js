@@ -30,8 +30,8 @@ export const UserStorage = ({ children }) => {
             const decoded = jwt_decode(token)
 
             axios.get(`http://localhost:8080/profile/${decoded.id}`)
-            .then(response => setData(response.data[0]))
-            .catch(err => console.log(err))
+                .then(response => setData(response.data[0]))
+                .catch(err => console.log(err))
         }
     }, [])
 
