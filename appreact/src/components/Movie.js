@@ -77,6 +77,7 @@ const Movie = () => {
                                 <h5 className="card-title">{comment.title}</h5>
                                 <p className="card-text">{comment.text}</p>
                             </div>
+                            <div class="card-footer bg-transparent">{comment.username}</div>
                         </div>
                     ))
                 }

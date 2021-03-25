@@ -31,8 +31,7 @@ export const UserStorage = ({ children }) => {
 
             axios.get(`http://localhost:8080/profile/${decoded.id}`)
             .then(response => setData(response.data[0]))
-
-            console.log(data)
+            .catch(err => console.log(err))
         }
     }, [])
 

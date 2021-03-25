@@ -14,8 +14,6 @@ const Home = () => {
             
             <Slider title="Comedy" firstSection={1} />
             <Slider title="Horror" firstSection={4} />
-            <Slider title="B-Movie" firstSection={7} />
-            
         </div>
     )
 }
