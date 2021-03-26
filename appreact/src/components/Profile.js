@@ -9,7 +9,7 @@ const Profile = () => {
     const [user, setUser] = React.useState(data)
     const { id } = useParams()
 
-    console.log(id)
+    console.log("Aqui" + id)
 
     React.useEffect(() => {
         if (id != undefined) {

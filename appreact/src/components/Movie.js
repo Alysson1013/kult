@@ -30,20 +30,39 @@ const Movie = () => {
 
     React.useEffect(() => {
         if (token != null) {
-            function handleClick(){
-                const title = document.getElementById("title").value
-                const text = document.getElementById("text").value
-                const note = document.querySelector('input[name="rate"]:checked').value;
+            function handleClick() {
+                let title = document.getElementById("title").value
+                let text = document.getElementById("text").value
+                let note = document.querySelector('input[name="rate"]:checked').value;
 
                 axios.post("http://localhost:8080/review", {
                     text: text,
                     title: title,
                     note: note,
                     movie_id: id
-                },{
+                }, {
                     headers: {
-                        Authorization:"Bearer " + token
+                        Authorization: "Bearer " + token
                     }
+                }).then(() => {
+                    async function fetchMovie(url) {
+                        try {
+                            const response = await fetch(url)
+                            const json = await response.json()
+                            setMovie(json)
+                        } catch (error) {
+                            setError("Um erro ocorreu")
+                        }
+                    }
+                    fetchMovie(`http://localhost:8080/movie/${id}`).then(response => {
+                        console.log(response)
+                        document.getElementById("title").value = ''
+                        document.getElementById("text").value = ''
+                        var inputs = document.querySelectorAll('input[type="radio"]');
+                        for (var i = 0, l = inputs.length; i < l; i++) {
+                            inputs[i].checked = false;
+                        }
+                    })
                 })
             }
 
