@@ -8,6 +8,7 @@ import Signup from './components/Signup'
 import Signin from './components/Signin'
 import { UserStorage } from './userStorage/userContext'
 import Profile from './components/Profile'
+import Manage from './components/Manage'
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="signup" element={<Signup />} />
           <Route path="signin" element={<Signin />} />
           <Route path="profile/:id" element={<Profile />} />
+          <Route path="manage" element={<Manage />} />
         </Routes>
       </BrowserRouter>
     </UserStorage>
