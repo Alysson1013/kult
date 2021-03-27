@@ -3,6 +3,7 @@ import { UserContext } from '../userStorage/userContext'
 import styles from './Profile.module.css'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
+import Head from './Head'
 
 const Profile = () => {
     const { data } = React.useContext(UserContext)
@@ -23,6 +24,7 @@ const Profile = () => {
     if (user == null) return null
     return (
         <div className={"card text-white bg-dark mb-3 animate__animated animate__bounceInLeft " + styles.card} style={{ width: '30rem' }}>
+            <Head title={`Kult | Profile`} />
             <img src={user.avatar} className="card-img-top" alt="..." />
             <div className="card-body ">
                 <h1>

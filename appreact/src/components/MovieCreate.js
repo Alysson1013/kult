@@ -2,6 +2,7 @@ import React from 'react'
 import styles from './MovieCreate.module.css'
 import axios from 'axios'
 import { UserContext } from '../userStorage/userContext'
+import Head from './Head'
 
 const MovieCreate = () => {
     const { token } = React.useContext(UserContext)
@@ -42,6 +43,7 @@ const MovieCreate = () => {
 
     return (
         <div className={`card bg-dark ` + styles.card}>
+            <Head title={`Kult | Manager`} />
             <div className={`card-header`}>
                 Movie Editor
             </div>

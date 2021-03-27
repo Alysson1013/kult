@@ -3,6 +3,7 @@ import styles from './Manage.module.css'
 import axios from 'axios'
 import { UserContext } from '../userStorage/userContext'
 import { NavLink } from 'react-router-dom'
+import Head from './Head'
 
 const Manage = () => {
     const [movies, setMovies] = React.useState(null)
@@ -110,14 +111,15 @@ const Manage = () => {
         getReviews()
     }, [])
 
-    
+
     if (data == null) return null
     if (movies == null) return null
     if (users == null) return null
     if (reviews == null) return null
-    if (data.role != 1) return <p style={{textAlign: 'center', marginTop: '5%'}}>You are't a admin</p>
+    if (data.role != 1) return <p style={{ textAlign: 'center', marginTop: '5%' }}>You are't a admin</p>
     return (
         <div>
+            <Head title={`Kult | Manager`} />
             <table className={"table table-dark animate__animated animate__bounceInLeft " + styles.table}>
                 <thead>
                     <p>Movies</p>
@@ -152,6 +154,7 @@ const Manage = () => {
             </table>
             <table className={"table table-dark animate__animated animate__bounceInLeft " + styles.table}>
                 <thead>
+                    <p>Users</p>
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Username</th>
@@ -180,6 +183,7 @@ const Manage = () => {
             </table>
             <table className={"table table-dark animate__animated animate__bounceInLeft " + styles.table}>
                 <thead>
+                    <p>Movies</p>
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Title</th>

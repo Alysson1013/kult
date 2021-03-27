@@ -1,10 +1,10 @@
 import React from 'react'
 import styles from './Signin.module.css'
 import { UserContext } from '../userStorage/userContext'
+import Head from './Head'
 
 const Signin = () => {
     const { setUser, error } = React.useContext(UserContext);
-    const { data } = React.useContext(UserContext)
 
     function login(event){
         event.preventDefault()
@@ -20,6 +20,7 @@ const Signin = () => {
 
     return (
         <form className={styles.box} onSubmit={login}>
+            <Head title={`Kult | Sign in`} />
             <h1>Sign Up</h1>
             <input type="email" name="" id="email" required placeholder="Email" />
             <input type="password" name="" id="password" required placeholder="Password" />

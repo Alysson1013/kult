@@ -2,6 +2,7 @@ import React from 'react'
 import styles from './Signup.module.css'
 import axios from 'axios'
 import validator from 'validator';
+import Head from './Head'
 
 const Signup = () => {
     const [error, setError] = React.useState(null)
@@ -38,6 +39,7 @@ const Signup = () => {
 
     return (
         <form className={styles.box} onSubmit={handleSubmit}>
+            <Head title={`Kult | Sign un`} />
             <h1>Sign Up</h1>
             <input type="text" name="" id="username" required placeholder="Username" />
             <input type="email" name="" id="email" required placeholder="Email" />
