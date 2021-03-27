@@ -6,6 +6,7 @@ import { NavLink } from 'react-router-dom'
 
 const Manage = () => {
     const [movies, setMovies] = React.useState(null)
+    const [users, setUsers] = React.useState(null)
     const { token } = React.useContext(UserContext)
 
     async function deleteMovie({ target }) {
@@ -20,8 +21,23 @@ const Manage = () => {
             })
             let { data } = await axios.get("http://localhost:8080/movie")
             setMovies(data)
-            const json = await response.json()
-            console.log(json)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async function deleteUser({ target }) {
+        try {
+            const response = await axios.delete("http://localhost:8080/user/admin", {
+                headers: {
+                    Authorization: "Bearer " + token
+                },
+                data: {
+                    id: target.value
+                }
+            })
+            let { data } = await axios.get("http://localhost:8080/movie")
+            setUsers(data)
         } catch (error) {
             console.log(error)
         }
@@ -43,12 +59,31 @@ const Manage = () => {
         getMovies()
     }, [])
 
+    React.useEffect(() => {
+        async function getUsers() {
+            try {
+                let { data } = await axios.get("http://localhost:8080/user/admin/", {
+                    headers: {
+                        Authorization: "Bearer " + token
+                    }
+                })
+                setUsers(data)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        getUsers()
+    }, [])
+
     if (movies == null) return null
+    if (users == null) return null
     return (
         <div>
             <table className={"table table-dark " + styles.table}>
                 <thead>
+                    <p>Movies</p>
                     <button onClick={addMovie} className={"btn btn-secondary"}>Adicionar Filme</button>
+                    <br />
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Name</th>
@@ -71,6 +106,34 @@ const Manage = () => {
                                     </button>
                                 </NavLink>
                                 <button className={"btn btn-danger " + styles.button} onClick={deleteMovie} value={movie.id}>Delete</button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+            <table className={"table table-dark " + styles.table}>
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {users.map(user => (
+                        <tr>
+                            <td>
+                                {user.id}
+                            </td>
+                            <td>
+                                {user.username}
+                            </td>
+                            <td>
+                                {user.email}
+                            </td>
+                            <td>
+                                <button className={"btn btn-danger " + styles.button} onClick={deleteUser} value={user.id}>Delete</button>
                             </td>
                         </tr>
                     ))}
