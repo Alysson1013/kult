@@ -7,11 +7,12 @@ import { NavLink } from 'react-router-dom'
 const Manage = () => {
     const [movies, setMovies] = React.useState(null)
     const [users, setUsers] = React.useState(null)
+    const [reviews, setReviews] = React.useState(null)
     const { token } = React.useContext(UserContext)
 
     async function deleteMovie({ target }) {
         try {
-            const response = await axios.delete("http://localhost:8080/movie/admin", {
+            await axios.delete("http://localhost:8080/movie/admin", {
                 headers: {
                     Authorization: "Bearer " + token
                 },
@@ -28,7 +29,7 @@ const Manage = () => {
 
     async function deleteUser({ target }) {
         try {
-            const response = await axios.delete("http://localhost:8080/user/admin", {
+            await axios.delete("http://localhost:8080/user/admin", {
                 headers: {
                     Authorization: "Bearer " + token
                 },
@@ -36,8 +37,29 @@ const Manage = () => {
                     id: target.value
                 }
             })
-            let { data } = await axios.get("http://localhost:8080/movie")
+            let { data } = await axios.get("http://localhost:8080/user/admin/", {
+                headers: {
+                    Authorization: "Bearer " + token
+                }
+            })
             setUsers(data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async function deleteReview({ target }) {
+        try {
+            await axios.delete("http://localhost:8080/review/admin", {
+                headers: {
+                    Authorization: "Bearer " + token
+                },
+                data: {
+                    id: target.value
+                }
+            })
+            let { data } = await axios.get("http://localhost:8080/review/")
+            setReviews(data)
         } catch (error) {
             console.log(error)
         }
@@ -75,8 +97,21 @@ const Manage = () => {
         getUsers()
     }, [])
 
+    React.useEffect(() => {
+        async function getReviews() {
+            try {
+                let { data } = await axios.get("http://localhost:8080/review")
+                setReviews(data)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        getReviews()
+    }, [])
+
     if (movies == null) return null
     if (users == null) return null
+    if (reviews == null) return null
     return (
         <div>
             <table className={"table table-dark " + styles.table}>
@@ -134,6 +169,30 @@ const Manage = () => {
                             </td>
                             <td>
                                 <button className={"btn btn-danger " + styles.button} onClick={deleteUser} value={user.id}>Delete</button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+            <table className={"table table-dark " + styles.table}>
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {reviews.map(review => (
+                        <tr>
+                            <td>
+                                {review.id}
+                            </td>
+                            <td>
+                                {review.title}
+                            </td>
+                            <td>
+                                <button className={"btn btn-danger " + styles.button} onClick={deleteReview} value={review.id}>Delete</button>
                             </td>
                         </tr>
                     ))}
