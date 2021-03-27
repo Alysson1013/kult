@@ -23,6 +23,8 @@ const MovieForm = () => {
     }, [id])
 
     async function handleSubmit(event) {
+        event.preventDefault();
+
         if (movie != null) {
             const title = document.getElementById("title").value
             const description = document.getElementById("description").value
@@ -52,7 +54,7 @@ const MovieForm = () => {
                         Authorization: "Bearer " + token
                     }
                 })
-                console.log(response)
+                window.location.href = "/manage"
             } catch (error) {
                 console.log(error)
             }
@@ -70,7 +72,7 @@ const MovieForm = () => {
                     <input type="text" className="form-control bg-dark text-white" id="title" defaultValue={movie[0].title} placeholder="" />
                     <br />
                     <label htmlFor="description" className="form-label">Description</label>
-                    <textarea className="form-control bg-dark text-white textarea" rows="3" id="description" value={movie[0].description} placeholder=""></textarea>
+                    <textarea className="form-control bg-dark text-white textarea" rows="3" id="description" defaultValue={movie[0].description} placeholder=""></textarea>
                     <br />
                     <label htmlFor="genre" className="form-label">Genre</label>
                     <input type="text" className="form-control bg-dark text-white" id="genre" defaultValue={movie[0].genre} placeholder="" />

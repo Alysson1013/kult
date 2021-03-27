@@ -10,6 +10,7 @@ import { UserStorage } from './userStorage/userContext'
 import Profile from './components/Profile'
 import Manage from './components/Manage'
 import MovieForm from './components/MovieForm'
+import MovieCreate from './components/MovieCreate'
 
 function App() {
   return (
@@ -23,7 +24,8 @@ function App() {
           <Route path="signin" element={<Signin />} />
           <Route path="profile/:id" element={<Profile />} />
           <Route path="manage" element={<Manage />} />
-          <Route path="edit/movie/:id" element={<MovieForm />} /> 
+          <Route path="edit/movie/:id" element={<MovieForm />} /> ]
+          <Route path="new/movie" element={<MovieCreate />} />
         </Routes>
       </BrowserRouter>
     </UserStorage>
