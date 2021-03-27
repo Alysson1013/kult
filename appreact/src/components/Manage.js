@@ -2,6 +2,7 @@ import React from 'react'
 import styles from './Manage.module.css'
 import axios from 'axios'
 import { UserContext } from '../userStorage/userContext'
+import { NavLink } from 'react-router-dom'
 
 const Manage = () => {
     const [movies, setMovies] = React.useState(null)
@@ -17,6 +18,8 @@ const Manage = () => {
                     id: target.value
                 }
             })
+            let { data } = await axios.get("http://localhost:8080/movie")
+                setMovies(data)
             const json = await response.json()
             console.log(json)
         } catch (error) {
@@ -57,7 +60,11 @@ const Manage = () => {
                                 {movie.title}
                             </td>
                             <td>
-                                <button className={"btn btn-warning " + styles.button}>Edit</button>
+                                <button className={"btn btn-warning " + styles.button}>
+                                    <NavLink to={`/edit/movie/${movie.id}`}>
+                                        Edit
+                                    </NavLink>
+                                </button>
                                 <button className={"btn btn-danger " + styles.button} onClick={deleteMovie} value={movie.id}>Delete</button>
                             </td>
                         </tr>

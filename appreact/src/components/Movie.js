@@ -94,9 +94,9 @@ const Movie = () => {
                         </div>
                     </div>
                     <div className="card-footer bg-transparent ">
-                        <butto className="btn btn-secondary" onClick={handleClick}>
+                        <button className="btn btn-secondary" onClick={handleClick}>
                             Postar
-                        </butto>
+                        </button>
                     </div>
                 </div>
             )

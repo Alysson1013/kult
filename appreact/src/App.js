@@ -9,6 +9,7 @@ import Signin from './components/Signin'
 import { UserStorage } from './userStorage/userContext'
 import Profile from './components/Profile'
 import Manage from './components/Manage'
+import MovieForm from './components/MovieForm'
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="signin" element={<Signin />} />
           <Route path="profile/:id" element={<Profile />} />
           <Route path="manage" element={<Manage />} />
+          <Route path="edit/movie/:id" element={<MovieForm />} /> 
         </Routes>
       </BrowserRouter>
     </UserStorage>
