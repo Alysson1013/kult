@@ -4,6 +4,7 @@ import { UserContext } from '../userStorage/userContext'
 
 const Signin = () => {
     const { setUser, error } = React.useContext(UserContext);
+    const { data } = React.useContext(UserContext)
 
     function login(event){
         event.preventDefault()
@@ -16,7 +17,6 @@ const Signin = () => {
             password: password
         })   
     }
-
 
     return (
         <form className={styles.box} onSubmit={login}>

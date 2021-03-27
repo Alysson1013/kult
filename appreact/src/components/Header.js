@@ -57,7 +57,7 @@ const Header = () => {
             console.log(error)
         }
     }
-
+    
     return (
         <nav className={"navbar navbar-dark bg-dark animate__animated animate__bounceInLeft " + styles.drop}>
             <NavLink className={"navbar-brand navbar-expand-lg " + styles.logo} to="/" end>Kult</NavLink>

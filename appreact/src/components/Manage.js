@@ -9,6 +9,7 @@ const Manage = () => {
     const [users, setUsers] = React.useState(null)
     const [reviews, setReviews] = React.useState(null)
     const { token } = React.useContext(UserContext)
+    const { data } = React.useContext(UserContext)
 
     async function deleteMovie({ target }) {
         try {
@@ -109,12 +110,15 @@ const Manage = () => {
         getReviews()
     }, [])
 
+    
+    if (data == null) return null
     if (movies == null) return null
     if (users == null) return null
     if (reviews == null) return null
+    if (data.role != 1) return <p style={{textAlign: 'center', marginTop: '5%'}}>You are't a admin</p>
     return (
         <div>
-            <table className={"table table-dark " + styles.table}>
+            <table className={"table table-dark animate__animated animate__bounceInLeft " + styles.table}>
                 <thead>
                     <p>Movies</p>
                     <button onClick={addMovie} className={"btn btn-secondary"}>Adicionar Filme</button>
@@ -146,7 +150,7 @@ const Manage = () => {
                     ))}
                 </tbody>
             </table>
-            <table className={"table table-dark " + styles.table}>
+            <table className={"table table-dark animate__animated animate__bounceInLeft " + styles.table}>
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
@@ -174,7 +178,7 @@ const Manage = () => {
                     ))}
                 </tbody>
             </table>
-            <table className={"table table-dark " + styles.table}>
+            <table className={"table table-dark animate__animated animate__bounceInLeft " + styles.table}>
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
