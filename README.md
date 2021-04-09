@@ -50,6 +50,11 @@ npm start
 ![](Login.png)
 ### Cadastro
 ![](Cadastro.png)
+### Filme
+![](Filme.png)
+### Gerenciamento
+![](Gerenciamento.png)
+
 
 
 
