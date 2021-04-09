@@ -45,7 +45,11 @@ npm start
 
 ## Prints do Projeto
 ### Home
-![](Home.PNG)
+![](Home.png)
+### Login
+![](Login.png)
+### Cadastro
+![](Cadastro.png)
 
 
 
